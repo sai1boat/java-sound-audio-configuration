@@ -18,7 +18,6 @@ public class AudioConfiguration {
 	private static int defaultInternalBufferSize;
 	private static int defaultExternalBufferSize;
 	private static EchoTest et;
-	private static boolean go = true;
 	static Preferences prefs;
 	
 
@@ -59,8 +58,8 @@ public class AudioConfiguration {
 	public AudioConfiguration(JFrame parent, String configurationPath,int defaultInternalBufSize, int defaultExternalBufSize){
 		
 		 prefs= Preferences.systemRoot().node(configurationPath);
-		 this.defaultInternalBufferSize = defaultInternalBufSize;
-		 this.defaultExternalBufferSize = defaultExternalBufSize;
+		 defaultInternalBufferSize = defaultInternalBufSize;
+		 defaultExternalBufferSize = defaultExternalBufSize;
 		 
 		/*
 		 * Grab all available mixers, and put them into a hashmap
@@ -90,7 +89,7 @@ public class AudioConfiguration {
 		});
 		
 		
-		/* a nice infomative message */
+		/* a nice informative message */
 		JPanel messagePanel = new JPanel();
 		messagePanel.setLayout(new java.awt.GridLayout(0,1));
 		String info =" Make a selection for both Input and Output.";
@@ -123,7 +122,7 @@ public class AudioConfiguration {
 			JRadioButton button = new JRadioButton(name);
 			if(prefs.get("inputMixer", "").compareTo(name)==0){
 				button.setSelected(true);
-				this.inputMixer = AudioSystem.getMixer(mixers[i]);
+				inputMixer = AudioSystem.getMixer(mixers[i]);
 			}
 			button.addActionListener(new ActionListener(){
 				
@@ -313,6 +312,8 @@ public class AudioConfiguration {
 				int internalBufferSize = Integer.parseInt(prefs.get("internalBufferSize", 102400+""));
 				String test_inputMixer = prefs.get("inputMixer", "Java Sound Audio Engine");
 				String test_outputMixer = prefs.get("outputMixer", "Java Sound Audio Engine");
+				
+				
 				AudioFormat audioFormat = new AudioFormat(
 		                AudioFormat.Encoding.PCM_SIGNED,44100.0f, bitDepth, channels,frameSize,44100.0f, false);
 				r_line = IUAudio.Util.getTargetLine(audioFormat, test_inputMixer,internalBufferSize);
