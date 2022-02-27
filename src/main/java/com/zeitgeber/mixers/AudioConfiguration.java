@@ -111,9 +111,8 @@ public class AudioConfiguration {
 		mixerFrame.setPreferredSize(new java.awt.Dimension(300,400));
 
 		ButtonGroup inputGroup = new ButtonGroup();
-		//mixerFrame.add(new JLabel("Input driver"));
 		JPanel inputFrame = new JPanel();
-		inputFrame.setBorder(BorderFactory.createTitledBorder("Input driver"));
+		inputFrame.setBorder(BorderFactory.createTitledBorder("Input device"));
 		inputFrame.setLayout(new java.awt.GridLayout(0,1));
 		
 		for(int i=0;i<mixers.length;i++)
@@ -148,9 +147,9 @@ public class AudioConfiguration {
 		
 		
 		
-		//mixerFrame.add(new JLabel("Output driver"));
+
 		JPanel outputFrame = new JPanel();
-		outputFrame.setBorder(BorderFactory.createTitledBorder("Output driver"));
+		outputFrame.setBorder(BorderFactory.createTitledBorder("Output device"));
 		outputFrame.setLayout(new java.awt.GridLayout(0,1));
 		
 		
@@ -184,11 +183,9 @@ public class AudioConfiguration {
 			outputGroup.add(button);
 			outputFrame.add(button);
 		}
-		JScrollPane outputScrollFrame = new JScrollPane();
-		outputScrollFrame.add(outputFrame);
-		mixerFrame.add(outputScrollFrame);
+
 		
-		//mixerFrame.add(outputFrame, java.awt.BorderLayout.SOUTH);
+		mixerFrame.add(outputFrame, java.awt.BorderLayout.SOUTH);
 		
 		
 		cFrame.add(mixerFrame,java.awt.BorderLayout.CENTER);
