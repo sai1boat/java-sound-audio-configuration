@@ -57,7 +57,7 @@ public class AudioConfiguration {
 	
 	public AudioConfiguration(JFrame parent, String configurationPath,int defaultInternalBufSize, int defaultExternalBufSize){
 		
-		 prefs= Preferences.systemRoot().node(configurationPath);
+		 prefs = Preferences.userRoot().node(configurationPath);
 		 defaultInternalBufferSize = defaultInternalBufSize;
 		 defaultExternalBufferSize = defaultExternalBufSize;
 		 
@@ -89,7 +89,7 @@ public class AudioConfiguration {
 		});
 		
 		
-		/* a nice informative message */
+		/* a nice informative message 
 		JPanel messagePanel = new JPanel();
 		messagePanel.setLayout(new java.awt.GridLayout(0,1));
 		String info =" Make a selection for both Input and Output.";
@@ -102,7 +102,7 @@ public class AudioConfiguration {
 		messagePanel.add(infoLabel2);
 		JLabel infoLabel3 = new JLabel(info3);
 		messagePanel.add(infoLabel3);
-		cFrame.add(messagePanel);
+		cFrame.add(messagePanel);*/
 		
 		
 		
@@ -134,7 +134,7 @@ public class AudioConfiguration {
 						r_line.close();
 					} catch (Exception e) {
 						javax.swing.JOptionPane.showMessageDialog(cFrame, "Line unavailable, please choose another driver");
-						e.printStackTrace();
+						
 					}finally{
 						System.out.println("Driver set to "+inputMixer);
 						prefs.put("inputMixer", inputMixer.getMixerInfo().getName());
@@ -152,6 +152,7 @@ public class AudioConfiguration {
 		JPanel outputFrame = new JPanel();
 		outputFrame.setBorder(BorderFactory.createTitledBorder("Output driver"));
 		outputFrame.setLayout(new java.awt.GridLayout(0,1));
+		
 		
 		ButtonGroup outputGroup = new ButtonGroup();
 		for(int i=0;i<mixers.length;i++)
@@ -171,8 +172,9 @@ public class AudioConfiguration {
 						SourceDataLine p_line =(SourceDataLine)outputMixer.getLine(new Line.Info(SourceDataLine.class));
 						p_line.close();
 					} catch (Exception e) {
+						button.setSelected(false);
 						javax.swing.JOptionPane.showMessageDialog(cFrame, "Line unavailable, please choose another driver");
-						e.printStackTrace();
+
 					}finally{
 						System.out.println("Driver set to "+outputMixer);
 						prefs.put("outputMixer", outputMixer.getMixerInfo().getName());
@@ -182,10 +184,14 @@ public class AudioConfiguration {
 			outputGroup.add(button);
 			outputFrame.add(button);
 		}
-		mixerFrame.add(outputFrame, java.awt.BorderLayout.SOUTH);
+		JScrollPane outputScrollFrame = new JScrollPane();
+		outputScrollFrame.add(outputFrame);
+		mixerFrame.add(outputScrollFrame);
+		
+		//mixerFrame.add(outputFrame, java.awt.BorderLayout.SOUTH);
 		
 		
-		cFrame.add(mixerFrame,java.awt.BorderLayout.NORTH);
+		cFrame.add(mixerFrame,java.awt.BorderLayout.CENTER);
 		
 		
 		
@@ -391,6 +397,6 @@ public class AudioConfiguration {
 		int internalBufSize = 7056;
 		int externalBufSize = 3528;
 		
-		new AudioConfiguration(new JFrame(),"/com/zeitgeber/test",internalBufSize,externalBufSize);
+		new AudioConfiguration(new JFrame(),"com.zeitgeber.test",internalBufSize,externalBufSize);
 	}
 }
