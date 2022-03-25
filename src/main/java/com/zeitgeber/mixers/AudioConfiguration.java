@@ -391,8 +391,8 @@ public class AudioConfiguration {
 	
 	
 	public static void main(String[] args){
-		int internalBufSize = 7056;
-		int externalBufSize = 3528;
+		int internalBufSize = 4096;
+		int externalBufSize = 2048;
 		
 		new AudioConfiguration(new JFrame(),"com.zeitgeber.test",internalBufSize,externalBufSize);
 	}
